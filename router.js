@@ -144,7 +144,7 @@ fos.Router.prototype.getRoute = function(name) {
 };
 
 
-fos.Router.prototype.getRoutingPath = function(name) {
+fos.Router.prototype.getRoutePath = function(name) {
     var route = (this.getRoute(name)),
         path = '';
 
