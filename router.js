@@ -153,7 +153,7 @@ fos.Router.prototype.getRoutePath = function(name) {
             path = token[1] + path;
         }
         if (token[0] == 'variable') {
-            path = ':' + token[3] + token[1] + path;
+            path = token[1] + ':' + token[3] + path;
         }
     });
     
