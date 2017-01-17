@@ -264,7 +264,7 @@ fos.Router.prototype.generate = function(name, opt_params, absolute) {
     return url;
 };
 
-var init = function(data) {
+module.exports = function(data) {
     var router = new fos.Router;
     router.setBaseUrl(/** @type {string} */ (data['base_url']));
     router.setRoutes(/** @type {Object.<string, fos.Router.Route>} */ (data['routes']));
@@ -275,6 +275,4 @@ var init = function(data) {
     router.setScheme(/** @type {string} */ (data['scheme']));
 
     return router;
-}
-
-module.exports = init;
+};
