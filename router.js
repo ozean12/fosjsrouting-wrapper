@@ -144,9 +144,25 @@ fos.Router.prototype.getRoute = function(name) {
 };
 
 
+fos.Router.prototype.getRoutingPath = function(name) {
+    var route = (this.getRoute(name)),
+        path = '';
+
+    route.tokens.forEach(function(token) {
+        if (token[0] == 'text') {
+            path = path + token[1];
+        }
+        if (token[0] == 'variable') {
+            path = path + token[1] + '{' + token[3] + '}';
+        }
+    });
+    
+    return this.context_.base_url + path;
+};
+
 /**
  * Generates the URL for a route.
- *
+ * 
  * @param {string} name
  * @param {Object.<string, string>} opt_params
  * @param {boolean} absolute
@@ -155,7 +171,7 @@ fos.Router.prototype.getRoute = function(name) {
 fos.Router.prototype.generate = function(name, opt_params, absolute) {
     var route = (this.getRoute(name)),
         params = opt_params || {},
-        unusedParams = _.clone(params),
+        unusedParams = _.cloneDeep(params),
         url = '',
         optional = true,
         host = '';
