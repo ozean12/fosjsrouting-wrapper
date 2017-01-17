@@ -150,10 +150,10 @@ fos.Router.prototype.getRoutePath = function(name) {
 
     route.tokens.forEach(function(token) {
         if (token[0] == 'text') {
-            path = path + token[1];
+            path = token[1] + path;
         }
         if (token[0] == 'variable') {
-            path = path + token[1] + '{' + token[3] + '}';
+            path = ':' + token[3] + token[1] + path;
         }
     });
     
