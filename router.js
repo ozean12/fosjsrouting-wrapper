@@ -197,7 +197,7 @@ fos.Router.prototype.generate = function(name, opt_params, absolute) {
         host = '';
     
     if (!_.isEmpty(this._context.apiToken)) {
-        _.assign(params, apiToken);
+        _.assign(params, this._context.apiToken);
     }
 
     route.tokens.forEach(function(token) {

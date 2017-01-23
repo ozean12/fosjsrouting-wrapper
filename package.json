@@ -1,6 +1,6 @@
 {
   "name": "fosjsrouting-wrapper",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "Front end wrapper for FOSJSTROUTING bundle",
   "main": "router.js",
   "scripts": {
