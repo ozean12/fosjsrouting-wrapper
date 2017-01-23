@@ -8,6 +8,7 @@ var fos = {};
  */
 fos.Router = function(opt_context, opt_routes) {
     this.context_ = opt_context || {base_url: '', prefix: '', host: '', scheme: ''};
+    this.context_.apiToken = {};
     this.setRoutes(opt_routes || {});
 };
 
@@ -89,6 +90,25 @@ fos.Router.prototype.setHost = function(host) {
  */
 fos.Router.prototype.getHost = function() {
     return this.context_.host;
+};
+
+/**
+ * @param {string} apiTokenValue
+ * @param {string} apiTokenKey
+ */
+fos.Router.prototype.setApiToken = function(apiTokenValue, apiTokenKey) {
+    if (typeof apiTokenKey == 'undefined') {
+        apiTokenKey = 'token';
+    }
+    this.context_.apiToken = {};
+    this.context_.apiToken[apiTokenKey] = apiTokenValue;
+};
+
+/**
+ * @return {string}
+ */
+fos.Router.prototype.getApiToken = function() {
+    return this.context_.apiToken;
 };
 
 
@@ -175,6 +195,10 @@ fos.Router.prototype.generate = function(name, opt_params, absolute) {
         url = '',
         optional = true,
         host = '';
+    
+    if (!_.isEmpty(this._context.apiToken)) {
+        _.assign(params, apiToken);
+    }
 
     route.tokens.forEach(function(token) {
         if ('text' === token[0]) {
@@ -289,6 +313,6 @@ module.exports = function(data) {
     }
     router.setHost(/** @type {string} */ (data['host']));
     router.setScheme(/** @type {string} */ (data['scheme']));
-
+    
     return router;
 };
