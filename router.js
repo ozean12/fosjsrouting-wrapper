@@ -191,14 +191,14 @@ fos.Router.prototype.getRoutePath = function(name) {
 fos.Router.prototype.generate = function(name, opt_params, absolute) {
     var route = (this.getRoute(name)),
         params = opt_params || {},
-        unusedParams = _.cloneDeep(params),
         url = '',
         optional = true,
         host = '';
     
-    if (!_.isEmpty(this._context.apiToken)) {
-        _.assign(params, this._context.apiToken);
+    if (!_.isEmpty(this.context_.apiToken)) {
+        _.assign(params, this.context_.apiToken);
     }
+    var unusedParams = _.cloneDeep(params);
 
     route.tokens.forEach(function(token) {
         if ('text' === token[0]) {
