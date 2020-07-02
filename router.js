@@ -1,4 +1,10 @@
-var _ = require('lodash');
+var _ = {
+    isEmpty: require(lodash.isEmpty),
+    assign: require(lodash.assign),
+    cloneDeep: require(lodash.cloneDeep),
+    size: require(lodash.size)
+};
+
 var fos = {};
 
 /**
