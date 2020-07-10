@@ -9,7 +9,7 @@ describe('Router', () => {
   beforeEach(() => {
     expect(api).toBe(null);
     expect(routerContext).toBe(null);
-    
+
     api = generateRouter(routes);
     routerContext = api.context_;
 
@@ -35,7 +35,7 @@ describe('Router', () => {
 
     api = generateRouter(config);
     routerContext = api.context_;
-    
+
     expect(routerContext).not.toBe(null);
     expect(routerContext.base_url).toBe('example.com');
     expect(routerContext.scheme).toBe('https');
@@ -43,7 +43,7 @@ describe('Router', () => {
 
   it('setHost - getHost', () => {
     api.setHost('example1.com');
-    
+
     expect(routerContext.host).toBe('example1.com');
     expect(api.getHost()).toBe('example1.com');
   });
@@ -57,15 +57,15 @@ describe('Router', () => {
 
   it('setBaseUrl - getBaseUrl', () => {
     api.setBaseUrl('helloworld.com');
-    
+
     expect(routerContext.base_url).toBe('helloworld.com');
     expect(api.getBaseUrl()).toBe('helloworld.com');
   });
-  
+
   it('setApiToken - getApiToken', () => {
     const token = 'someRandomTextAsToken';
     api.setApiToken(token);
-    
+
     expect(routerContext.apiToken.token).toBe(token);
     expect(api.getApiToken().token).toBe(token);
   });
@@ -75,7 +75,7 @@ describe('Router', () => {
     api.setRoutes(_routes);
 
     expect(Object.keys(api.getRoutes()).length).toBe(0);
-    
+
     api.setRoutes({ 'new-route': routes.routes['add-item'] });
     const keys = Object.keys(api.getRoutes());
     expect(keys.length).toBe(1);
@@ -84,26 +84,26 @@ describe('Router', () => {
 
   it('setPrefix', () => {
     api.setPrefix('v1');
-    
+
     expect(routerContext.prefix).toBe('v1');
   });
-  
+
   it('buildQueryParams', () => {
     const params = { a: 1, b: 'two', c: '' };
     const paramStr = [];
-    
+
     // add function which needs more elaborate cases
     // though following function just builds string to check of params in QS
     const add = (key, value) => paramStr.push(`${key[1]}=${value}`)
     api.buildQueryParams('', params, add);
     expect(paramStr.join('&')).toBe('a=1&b=two&c=');
   });
-  
+
   it('getRoute and getRoutePath', () => {
     api.setBaseUrl('');
     expect(api.getRoute('add-item')).toBe(routes.routes['add-item']);
     expect(api.getRoutePath('add-item')).toBe('/items/add');
-    
+
     const routeKey = 'new-route';
     const routeData = Object.assign({}, routes.routes['get-items'], {
       tokens: [
@@ -112,10 +112,10 @@ describe('Router', () => {
     });
     api.setRoutes({ [routeKey]: routeData });
     const keys = Object.keys(api.getRoutes());
-    
+
     expect(keys.length).toBe(1);
     expect(keys[0]).toBe(routeKey);
-    
+
     expect(
       JSON.stringify(api.getRoute(routeKey))
     ).toBe(JSON.stringify(routeData));
@@ -153,7 +153,7 @@ describe('Router', () => {
       }
     ].forEach((testCase) => {
       const config = Object.assign({}, routes, testCase.config);
-      
+
       api = generateRouter(config);
       const url = api.generate(testCase.key);
 
