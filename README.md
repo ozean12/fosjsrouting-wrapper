@@ -1,5 +1,7 @@
 #  Node module for FOSJSROUTING bundle
 
+![tests](https://github.com/ozean12/fosjsrouting-wrapper/workflows/tests/badge.svg?branch=master)
+
 ## Installation
 
 npm install --save fosjsrouting-wrapper

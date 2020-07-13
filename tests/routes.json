@@ -1,0 +1,34 @@
+{
+  "routes": {
+    "get-items": {
+      "tokens": [
+        [
+          "text",
+          "/items"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "GET"
+      ],
+      "schemes": []
+    },
+    "add-item": {
+      "tokens": [
+        [
+          "text",
+          "/items/add"
+        ]
+      ],
+      "defaults": [],
+      "requirements": [],
+      "hosttokens": [],
+      "methods": [
+        "POST"
+      ],
+      "schemes": []
+    }
+  }
+}
